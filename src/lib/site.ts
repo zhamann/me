@@ -11,6 +11,7 @@ export const site = {
     "I work at an investment advisory firm, where I went from intern to owner of the firm’s software platform in five years. I design, test, and run its internal and client-facing applications.",
     "After hours I ship my own products. They include a race directory with 1,000+ weekly users, a strength coach you text, and open-source tools for money, recipes, and video.",
   ],
+  blog: "What I think and what I’ve learned from building software.",
   contact: {
     heading: "Ask me how any of it works.",
     text: "I’m happy to get into the details, whether that’s a design decision, a tool I picked, a bug you found, or something you’d like to build. Email is the best way to reach me.",

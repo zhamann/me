@@ -1,0 +1,57 @@
+---
+import { IconRss } from "@tabler/icons-react"
+
+import PostDate from "@/components/post-date.astro"
+import SiteFooter from "@/components/site-footer.astro"
+import { buttonVariants } from "@/components/ui/button"
+import Layout from "@/layouts/main.astro"
+import { getPosts, postPath } from "@/lib/posts"
+import { site } from "@/lib/site"
+import { cn } from "@/lib/utils"
+
+const posts = await getPosts()
+---
+
+<Layout title={`Blog by ${site.name}`} description={site.blog}>
+  <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
+    <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+      <div>
+        <h1 class="type-display text-5xl sm:text-6xl">Blog</h1>
+        <p class="mt-4 max-w-[50ch] text-xl text-muted-foreground">
+          {site.blog}
+        </p>
+      </div>
+      <a
+        href="/rss.xml"
+        class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+      >
+        <IconRss data-icon="inline-start" aria-hidden="true" />
+        RSS
+      </a>
+    </div>
+    <ul class="mt-12 flex flex-col gap-8">
+      {posts.map((post) => (
+        <li class="grid gap-x-12 gap-y-2 border-t pt-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
+          <PostDate
+            date={post.data.published}
+            class="text-muted-foreground md:pt-1"
+          />
+          <div>
+            <h2 class="type-title text-2xl">
+              <a
+                href={postPath(post)}
+                class="rounded-sm decoration-ink underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/60"
+              >
+                {post.data.title}
+              </a>
+            </h2>
+            <p class="mt-2 max-w-[65ch] text-lg leading-relaxed text-muted-foreground">
+              {post.data.summary}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </main>
+  <SiteFooter />
+</Layout>

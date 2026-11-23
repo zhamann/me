@@ -1,0 +1,19 @@
+---
+interface Props {
+  date: Date
+  class?: string
+}
+
+const { date, class: className } = Astro.props
+
+// A post's date has no time, so it's read as UTC. Any other zone could show
+// the day before.
+const label = date.toLocaleDateString("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC",
+})
+---
+
+<time datetime={date.toISOString().slice(0, 10)} class={className}>
+  {label}
+</time>
