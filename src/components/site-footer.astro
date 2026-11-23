@@ -1,0 +1,25 @@
+---
+import { ContactCard } from "@/components/contact-card"
+import { site } from "@/lib/site"
+
+const year = new Date().getFullYear()
+---
+
+<footer id="contact" class="mx-auto mt-28 max-w-6xl px-5 sm:mt-36 sm:px-8">
+  <ContactCard />
+  <div class="flex flex-wrap justify-between gap-x-8 gap-y-2 py-8 text-sm text-muted-foreground">
+    <p>
+      © {year} {site.name}
+    </p>
+    <p>
+      Need software built for your business? I consult as{" "}
+      <a
+        href={site.artios}
+        class="text-foreground underline decoration-ink underline-offset-4"
+      >
+        Artios
+      </a>
+      .
+    </p>
+  </div>
+</footer>
