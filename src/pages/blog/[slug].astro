@@ -24,6 +24,8 @@ interface Props {
 const { post } = Astro.props
 const { title, summary, published } = post.data
 const { Content, headings } = await render(post)
+// Odd parts are hyphenated words, which shouldn't break at the hyphen.
+const titleParts = title.split(/(\S+-\S+)/)
 const sections = headings.filter((heading) => heading.depth === 2)
 ---
 
@@ -35,7 +37,11 @@ const sections = headings.filter((heading) => heading.depth === 2)
 >
   <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
     <header>
-      <h1 class="type-display max-w-[18ch] text-4xl sm:text-6xl">{title}</h1>
+      <h1 class="type-display text-3xl sm:text-4xl xl:text-[2.75rem]">
+        {titleParts.map((part, i) =>
+          i % 2 ? <span class="whitespace-nowrap">{part}</span> : part
+        )}
+      </h1>
       <PostDate date={published} class="mt-5 block text-muted-foreground" />
     </header>
 
