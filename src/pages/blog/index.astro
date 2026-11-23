@@ -12,15 +12,10 @@ import { cn } from "@/lib/utils"
 const posts = await getPosts()
 ---
 
-<Layout title={`Blog by ${site.name}`} description={site.blog}>
+<Layout title={`Blog by ${site.name}`} description={`Posts by ${site.name}.`}>
   <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
-      <div>
-        <h1 class="type-display text-5xl sm:text-6xl">Blog</h1>
-        <p class="mt-4 max-w-[50ch] text-xl text-muted-foreground">
-          {site.blog}
-        </p>
-      </div>
+      <h1 class="type-display text-5xl sm:text-6xl">Blog</h1>
       <a
         href="/rss.xml"
         class={cn(buttonVariants({ variant: "outline", size: "lg" }))}

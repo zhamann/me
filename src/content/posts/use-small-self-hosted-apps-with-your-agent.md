@@ -1,6 +1,6 @@
 ---
 title: You should use small, self-hosted apps with your agent
-summary: What I learned after I got tired of explaining my finances to AI, and how you can get started.
+summary: It’s easier than trying to get your existing software to work with it.
 published: 2026-11-23
 ---
 
