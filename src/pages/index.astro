@@ -1,11 +1,64 @@
 ---
+import { Drawing } from "@/components/drawing"
+import Icon from "@/components/icon.astro"
+import { buttonVariants } from "@/components/ui/button"
 import Layout from "@/layouts/main.astro"
 import { site } from "@/lib/site"
+import { cn } from "@/lib/utils"
+
+const container = "mx-auto max-w-6xl px-5 sm:px-8"
 ---
 
 <Layout>
-  <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
-    <h1 class="type-display text-6xl sm:text-7xl">{site.name}</h1>
-    <p class="mt-4 text-xl text-muted-foreground">{site.role}</p>
+  <main id="content">
+    <section
+      class={cn(
+        container,
+        "grid items-center gap-x-10 gap-y-10 pt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:pt-14"
+      )}
+    >
+      <div>
+        <h1 class="type-display text-6xl sm:text-7xl">{site.name}</h1>
+        <p class="mt-4 text-xl text-muted-foreground">{site.role}</p>
+        {site.intro.map((text) => (
+          <p class="mt-5 max-w-[50ch] text-lg leading-relaxed text-foreground/85">
+            {text}
+          </p>
+        ))}
+        <div class="mt-8 flex flex-wrap gap-2">
+          <a
+            href={site.github}
+            target="_blank"
+            rel="noopener"
+            class={cn(buttonVariants({ size: "lg" }))}
+          >
+            <Icon name="github" data-icon="inline-start" />
+            GitHub
+          </a>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener"
+            class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          >
+            <Icon name="linkedin" data-icon="inline-start" />
+            LinkedIn
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          >
+            <Icon name="email" data-icon="inline-start" />
+            Email
+          </a>
+        </div>
+      </div>
+      <div class="@container grid justify-center max-lg:order-first">
+        <Drawing
+          name="portrait"
+          label="Zac in a backwards cap, smiling, drawn in characters."
+        />
+      </div>
+    </section>
   </main>
 </Layout>

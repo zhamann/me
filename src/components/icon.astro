@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+interface Props extends HTMLAttributes<"svg"> {
+  /** A file in `src/icons`, without its extension. */
+  name: string
+}
+
+const { name, class: className, ...attrs } = Astro.props
+
+const files = import.meta.glob<string>("../icons/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+})
+const source = files[`../icons/${name}.svg`]
+if (!source) throw new Error(`No icon named "${name}".`)
+
+// Every shape draws as one silhouette in the current text color.
+const viewBox = source.match(/viewBox="([^"]+)"/)?.[1]
+const body = source
+  .replace(/^[\s\S]*?<svg[^>]*>|<\/svg>\s*$/g, "")
+  .replace(/<(title|style)>[\s\S]*?<\/\1>/g, "")
+  .replace(/\s(?:class|fill)="[^"]*"/g, "")
+  .trim()
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={viewBox}
+  fill="currentColor"
+  class={className}
+  aria-hidden="true"
+  {...attrs}
+  set:html={body}
+/>
