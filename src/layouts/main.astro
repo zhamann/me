@@ -1,0 +1,44 @@
+---
+import "@/styles/global.css"
+
+import SiteHeader from "@/components/site-header.astro"
+import { site } from "@/lib/site"
+
+interface Props {
+  title?: string
+  description?: string
+  /** Keep the page out of search results. */
+  hidden?: boolean
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  hidden = false,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {hidden && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body class="min-h-svh">
+    <a
+      href="#content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+    >
+      Skip to content
+    </a>
+    <SiteHeader />
+    <slot />
+  </body>
+</html>
