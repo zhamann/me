@@ -1,11 +1,22 @@
 ---
+import {
+  IconActivityHeartbeat,
+  IconArrowsShuffle,
+  IconCloud,
+  IconKey,
+  IconSparkles,
+  IconTestPipe,
+} from "@tabler/icons-react"
+
 import { Drawing } from "@/components/drawing"
 import Icon from "@/components/icon.astro"
 import { ProjectCard } from "@/components/project-card"
+import TenureRow from "@/components/tenure.astro"
+import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import Layout from "@/layouts/main.astro"
 import { getProjects, projectPath, type Project } from "@/lib/projects"
-import { site } from "@/lib/site"
+import { education, experience, site, skills, systems } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const projects = await getProjects()
@@ -19,6 +30,15 @@ const card = (project: Project) => ({
   summary: project.data.summary,
   tags: project.data.tags,
 })
+
+const systemIcons: Record<string, typeof IconKey> = {
+  "Process automation": IconArrowsShuffle,
+  "Identity and access": IconKey,
+  "Cloud infrastructure": IconCloud,
+  "AI integration": IconSparkles,
+  "Testing and CI": IconTestPipe,
+  "Production operations": IconActivityHeartbeat,
+}
 
 const container = "mx-auto max-w-6xl px-5 sm:px-8"
 const heading = "type-display text-4xl sm:text-5xl"
@@ -99,6 +119,88 @@ const heading = "type-display text-4xl sm:text-5xl"
           </li>
         ))}
       </ul>
+    </section>
+
+    <section
+      id="experience"
+      aria-labelledby="experience-heading"
+      class={cn(container, "mt-28 sm:mt-36")}
+    >
+      <h2 id="experience-heading" class={heading}>
+        Experience
+      </h2>
+      <div class="mt-10 flex flex-col gap-12">
+        {experience.map((tenure) => (
+          <TenureRow tenure={tenure} />
+        ))}
+      </div>
+    </section>
+
+    <section
+      id="education"
+      aria-labelledby="education-heading"
+      class={cn(container, "mt-24 sm:mt-28")}
+    >
+      <h2 id="education-heading" class={heading}>
+        Education
+      </h2>
+      <div class="mt-10 flex flex-col gap-12">
+        {education.map((tenure) => (
+          <TenureRow tenure={tenure} />
+        ))}
+      </div>
+    </section>
+
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      class={cn(container, "mt-24 sm:mt-28")}
+    >
+      <h2 id="skills-heading" class={heading}>
+        Skills
+      </h2>
+      <dl class="mt-10 flex flex-col gap-8">
+        {skills.map((group) => (
+          <div class="grid gap-x-12 gap-y-4 border-t pt-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
+            <dt class="type-title text-xl">{group.title}</dt>
+            <dd class="flex flex-wrap gap-x-7 gap-y-4">
+              {group.items.map((item) => (
+                <span class="inline-flex items-center gap-2.5 text-lg">
+                  <Icon name={item.icon} class="size-5 text-muted-foreground" />
+                  {item.name}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))}
+        <div class="grid gap-x-12 gap-y-4 border-t pt-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
+          <dt class="type-title text-xl">Systems</dt>
+          <dd class="grid gap-x-10 gap-y-7 sm:grid-cols-2">
+            {systems.map((system) => {
+              const SystemIcon = systemIcons[system.name]
+              return (
+                <div>
+                  <p class="flex items-center gap-2.5 text-lg">
+                    <SystemIcon
+                      className="size-5 shrink-0 text-muted-foreground"
+                      stroke={1.75}
+                      aria-hidden="true"
+                    />
+                    {system.name}
+                  </p>
+                  <ul class="mt-2.5 flex flex-wrap gap-1.5">
+                    {system.tools.map((tool) => (
+                      <li>
+                        <Badge variant="secondary">{tool}</Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
+          </dd>
+        </div>
+      </dl>
     </section>
   </main>
 </Layout>

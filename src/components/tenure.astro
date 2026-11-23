@@ -1,0 +1,29 @@
+---
+import type { Tenure } from "@/lib/site"
+
+interface Props {
+  tenure: Tenure
+}
+
+const { tenure } = Astro.props
+---
+
+<article class="grid gap-x-12 gap-y-6 border-t pt-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
+  <header>
+    <h3 class="type-title text-xl">{tenure.org}</h3>
+    <p class="mt-1 text-muted-foreground">{tenure.place}</p>
+  </header>
+  <ol class="flex flex-col gap-8">
+    {tenure.roles.map((role) => (
+      <li>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h4 class="text-lg font-semibold">{role.title}</h4>
+          <p class="text-sm text-muted-foreground">{role.period}</p>
+        </div>
+        <p class="mt-2 max-w-[70ch] leading-relaxed text-muted-foreground">
+          {role.description}
+        </p>
+      </li>
+    ))}
+  </ol>
+</article>
