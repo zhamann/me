@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-600.css";
 
 /* The site is dark only: <html> always has the class. */
 @custom-variant dark (&:is(.dark *));
@@ -103,6 +105,43 @@
   letter-spacing: -0.025em;
   line-height: 1.25;
   text-wrap: balance;
+}
+
+/*
+ * A drawing in plain characters. They're all set at one size, so a character
+ * is the same size in every one, and shrink only where the panel (a container)
+ * is too narrow for `--cols`, the drawing's width in characters.
+ */
+@utility drawing {
+  margin: 0;
+  font-family: var(--font-mono);
+  /* Steps of 0.625px make each line a whole number of pixels, so no seams. */
+  font-size: round(
+    down,
+    min(var(--drawing-size, 0.57rem), 100cqi / (var(--cols) * 0.605)),
+    0.625px
+  );
+  font-weight: 600;
+  line-height: 0.8;
+  color: var(--ink);
+  white-space: pre;
+  user-select: none;
+  /* Shadows in lighter ink, so a drawing has tone and not only texture. */
+  & i {
+    font-style: normal;
+  }
+  & .s0 {
+    opacity: 0.5;
+  }
+  & .s1 {
+    opacity: 0.68;
+  }
+  & .s2 {
+    opacity: 0.84;
+  }
+  & .s3 {
+    opacity: 0.92;
+  }
 }
 
 /* On touch screens, small controls grow to a 40px target. */
