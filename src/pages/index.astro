@@ -1,12 +1,27 @@
 ---
 import { Drawing } from "@/components/drawing"
 import Icon from "@/components/icon.astro"
+import { ProjectCard } from "@/components/project-card"
 import { buttonVariants } from "@/components/ui/button"
 import Layout from "@/layouts/main.astro"
+import { getProjects, projectPath, type Project } from "@/lib/projects"
 import { site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
+const projects = await getProjects()
+const current = projects.filter((p) => p.data.status === "current")
+const retired = projects.filter((p) => p.data.status === "retired")
+
+const card = (project: Project) => ({
+  id: project.id,
+  href: projectPath(project),
+  name: project.data.name,
+  summary: project.data.summary,
+  tags: project.data.tags,
+})
+
 const container = "mx-auto max-w-6xl px-5 sm:px-8"
+const heading = "type-display text-4xl sm:text-5xl"
 ---
 
 <Layout>
@@ -59,6 +74,31 @@ const container = "mx-auto max-w-6xl px-5 sm:px-8"
           label="Zac in a backwards cap, smiling, drawn in characters."
         />
       </div>
+    </section>
+
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      class={cn(container, "mt-28 sm:mt-36")}
+    >
+      <h2 id="projects-heading" class={heading}>
+        Projects
+      </h2>
+      <ul class="mt-10 grid gap-5 md:grid-cols-2">
+        {current.map((project, i) => (
+          <li class={cn(i === 0 && "md:col-span-2")}>
+            <ProjectCard {...card(project)} wide={i === 0} />
+          </li>
+        ))}
+      </ul>
+      <h3 class="type-title mt-16 text-2xl">Retired</h3>
+      <ul class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+        {retired.map((project, i) => (
+          <li class={i < 3 ? "lg:col-span-2" : "lg:col-span-3"}>
+            <ProjectCard {...card(project)} />
+          </li>
+        ))}
+      </ul>
     </section>
   </main>
 </Layout>
