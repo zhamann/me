@@ -1,0 +1,30 @@
+   =xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx=
+ .X##XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX##X.
+ X#XooooooooooooooooooooooooooooooooooooooooooX#X
++#XooooooooooooooooooooooooooooooooooooooooooooX#+
+o#oooooooooooooooooooooooooooooooooooooooooooooo#o
+o#oooooooooooooooooooooooooooooooooooooooooooooo#o
+o#oooooooooooooooooooooooooooooooooooooooooooooo#o
+o#oooooooooooooooooooooooooooooooooooooooooooooo#o
+o#oooooooooooooooooooooooooooooooooooooooooooooo#o
+o################################################o
+o#..............................................#o
+o#..............................................#o
+o#..............................................#o
+o#..............................................#o
+o#.............xoooooooooooooooooox.............#o
+o#............+@@@@@@@@@@@@@@@@@@@@+............#o
+o#............+@@@@@@@@@@@@@@@@@@@@+............#o
+o#.............++++++++++++++++++++.............#o
+o#..............................................#o
+o#..............................................#o
+o#................=++++++++++++=................#o
+o#................o@@@@@@@@@@@@o................#o
+o#................o@@@@@@@@@@@@o................#o
+o#...+ox-.........=oooooooooooo=.........-xo+...#o
+o#..+%%%o................................o%%%+..#o
+o#-.=%%%o................................o%%%=.-#o
++#x..=x+..................................+x=..x#+
+ X#+..........................................+#X
+ .X#Xx++++++++++++++++++++++++++++++++++++++xX#X.
+   =xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx=

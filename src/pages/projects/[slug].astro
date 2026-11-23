@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets"
+import { render } from "astro:content"
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUpRight,
+} from "@tabler/icons-react"
+
+import { Drawing } from "@/components/drawing"
+import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
+import Layout from "@/layouts/main.astro"
+import { getProjects, projectPath, type Project } from "@/lib/projects"
+import { site } from "@/lib/site"
+import { cn } from "@/lib/utils"
+
+export async function getStaticPaths() {
+  const projects = await getProjects()
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      previous: projects.at(i - 1),
+      next: projects[(i + 1) % projects.length],
+    },
+  }))
+}
+
+interface Props {
+  project: Project
+  previous: Project
+  next: Project
+}
+
+const { project, previous, next } = Astro.props
+const { name, summary, status, tags, links, image, imageAlt, drawing } =
+  project.data
+const { Content, headings } = await render(project)
+const sections = headings.filter((heading) => heading.depth === 2)
+---
+
+<Layout title={`${name}, a project by ${site.name}`} description={summary}>
+  <main
+    id="content"
+    class="mx-auto grid max-w-6xl gap-y-8 px-5 pt-6 sm:px-8 sm:pt-10 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-x-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-x-14"
+  >
+    <aside class="md:sticky md:top-24 md:self-start">
+      <div
+        class="@container grid h-56 place-items-center overflow-hidden rounded-3xl bg-card px-5 ring-1 ring-foreground/10 md:h-44 lg:h-52"
+        style={`view-transition-name: drawing-${project.id}`}
+      >
+        <Drawing name={project.id} label={drawing} />
+      </div>
+      <nav aria-label="On this page" class="mt-8 max-md:hidden">
+        <ul class="flex flex-col gap-2.5 text-sm text-muted-foreground">
+          {sections.map((section) => (
+            <li>
+              <a
+                href={`#${section.slug}`}
+                class="rounded-sm outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/60"
+              >
+                {section.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="min-w-0">
+      <header>
+        <h1 class="type-display text-5xl sm:text-6xl">{name}</h1>
+        <p class="mt-5 text-xl leading-relaxed text-foreground/85">{summary}</p>
+        <ul class="mt-6 flex flex-wrap gap-1.5" aria-label="Made with">
+          {status === "retired" && (
+            <li>
+              <Badge variant="outline">Retired</Badge>
+            </li>
+          )}
+          {tags.map((tag) => (
+            <li>
+              <Badge variant="secondary">{tag}</Badge>
+            </li>
+          ))}
+        </ul>
+        {links.length > 0 && (
+          <div class="mt-7 flex flex-wrap gap-2">
+            {links.map((link, i) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener"
+                class={cn(
+                  buttonVariants({
+                    variant: i === 0 ? "default" : "outline",
+                    size: "lg",
+                  })
+                )}
+              >
+                {link.label}
+                <IconArrowUpRight data-icon="inline-end" aria-hidden="true" />
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {image && imageAlt && (
+        <Image
+          src={image}
+          alt={imageAlt}
+          widths={[640, 1024, 1600]}
+          sizes="(min-width: 64rem) 48rem, 100vw"
+          class="mt-10 h-auto w-full rounded-2xl border"
+        />
+      )}
+
+      <article class="typeset mt-10">
+        <Content />
+      </article>
+
+      <nav
+        aria-label="More projects"
+        class="mt-16 flex flex-wrap justify-between gap-2 border-t pt-8"
+      >
+        <a
+          href={projectPath(previous)}
+          class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+        >
+          <IconArrowLeft data-icon="inline-start" aria-hidden="true" />
+          {previous.data.name}
+        </a>
+        <a
+          href={projectPath(next)}
+          class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+        >
+          {next.data.name}
+          <IconArrowRight data-icon="inline-end" aria-hidden="true" />
+        </a>
+      </nav>
+    </div>
+  </main>
+</Layout>

@@ -4,6 +4,7 @@
 @import "@fontsource-variable/ibm-plex-sans";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
 @import "@fontsource/ibm-plex-mono/latin-600.css";
+@import "./typeset.css";
 
 /* The site is dark only: <html> always has the class. */
 @custom-variant dark (&:is(.dark *));
@@ -91,6 +92,16 @@
   }
 }
 
+/* A card's drawing carries over to the project's page. */
+@view-transition {
+  navigation: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 @utility type-display {
   font-family: var(--font-heading);
   font-weight: 600;
@@ -142,6 +153,27 @@
   & .s3 {
     opacity: 0.92;
   }
+}
+
+/* The prose on a project's page. */
+.typeset :where(h2) {
+  margin-top: 2em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.typeset a {
+  text-decoration-color: var(--ink);
+  text-underline-offset: 0.2em;
+}
+
+/* Badges carry information, so they're set at the same small size as other text. */
+[data-slot="badge"] {
+  height: auto;
+  min-height: --spacing(7);
+  padding-inline: --spacing(3);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
 }
 
 /* On touch screens, small controls grow to a 40px target. */
