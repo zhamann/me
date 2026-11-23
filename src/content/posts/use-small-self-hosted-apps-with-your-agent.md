@@ -1,6 +1,6 @@
 ---
-title: Your agent works best with small apps
-summary: Why I use small, self-hosted apps with my agent, and how you can start using them with yours.
+title: You should use small, self-hosted apps with your agent
+summary: What I learned after I got tired of explaining my finances to AI, and how you can get started.
 published: 2026-11-23
 ---
 
