@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/ibm-plex-sans";
+
+/* The site is dark only: <html> always has the class. */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: "IBM Plex Sans Variable", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-ink: var(--ink);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * White text on black, and one amber ink that every drawing shares. Ink is for
+ * drawings and the marks that answer a reader (focus, selection, underlines);
+ * nothing else takes a color.
+ */
+:root {
+  --ink: #ffb86b;
+  --background: #000000;
+  --foreground: #f4f4f3;
+  --card: #0d0d0e;
+  --card-foreground: #f4f4f3;
+  --popover: #121213;
+  --popover-foreground: #f4f4f3;
+  --primary: #f4f4f3;
+  --primary-foreground: #000000;
+  --secondary: #1c1c1e;
+  --secondary-foreground: #f4f4f3;
+  --muted: #19191b;
+  --muted-foreground: #a3a3a8;
+  --accent: #202022;
+  --accent-foreground: #f4f4f3;
+  --destructive: #ff6b62;
+  --border: #28282b;
+  --input: #333337;
+  --ring: #ffb86b;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: --spacing(20);
+    text-size-adjust: none;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+  ::selection {
+    background: var(--ink);
+    color: var(--background);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@utility type-display {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+@utility type-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+/* On touch screens, small controls grow to a 40px target. */
+@media (pointer: coarse) {
+  [data-slot="button"] {
+    min-height: --spacing(10);
+  }
+}

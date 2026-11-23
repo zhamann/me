@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/main.astro"
+import { site } from "@/lib/site"
+---
+
+<Layout>
+  <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
+    <h1 class="type-display text-6xl sm:text-7xl">{site.name}</h1>
+    <p class="mt-4 text-xl text-muted-foreground">{site.role}</p>
+  </main>
+</Layout>
