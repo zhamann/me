@@ -176,7 +176,7 @@
   }
 }
 
-/* The prose on a project's page. */
+/* The prose on a project's page or in a post. */
 .typeset :where(h2) {
   margin-top: 2em;
   font-size: 1.5rem;

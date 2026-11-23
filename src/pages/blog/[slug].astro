@@ -1,0 +1,77 @@
+---
+import { render } from "astro:content"
+import { IconArrowLeft } from "@tabler/icons-react"
+
+import PostDate from "@/components/post-date.astro"
+import SiteFooter from "@/components/site-footer.astro"
+import { buttonVariants } from "@/components/ui/button"
+import Layout from "@/layouts/main.astro"
+import { getPosts, type Post } from "@/lib/posts"
+import { cn } from "@/lib/utils"
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }))
+}
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+const { title, summary, published } = post.data
+const { Content, headings } = await render(post)
+const sections = headings.filter((heading) => heading.depth === 2)
+---
+
+<Layout
+  title={title}
+  description={summary}
+  image={`/blog/${post.id}.png`}
+  published={published}
+>
+  <main id="content" class="mx-auto max-w-6xl px-5 pt-8 sm:px-8 lg:pt-14">
+    <header>
+      <h1 class="type-display max-w-[18ch] text-4xl sm:text-6xl">{title}</h1>
+      <PostDate date={published} class="mt-5 block text-muted-foreground" />
+    </header>
+
+    <div class="mt-10 grid md:grid-cols-[13rem_minmax(0,1fr)] md:gap-x-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-x-14">
+      <aside class="max-md:hidden md:sticky md:top-24 md:self-start">
+        <nav aria-label="On this page">
+          <ul class="flex flex-col gap-2.5 text-sm text-muted-foreground">
+            {sections.map((section) => (
+              <li>
+                <a
+                  href={`#${section.slug}`}
+                  class="rounded-sm outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/60"
+                >
+                  {section.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="max-w-[68ch] min-w-0 md:text-lg">
+        <article class="typeset">
+          <Content />
+        </article>
+        <div class="mt-16 border-t pt-8">
+          <a
+            href="/blog/"
+            class={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          >
+            <IconArrowLeft data-icon="inline-start" aria-hidden="true" />
+            All posts
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>
