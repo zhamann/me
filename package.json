@@ -13,8 +13,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "format": "prettier --write \"**/*.{ts,tsx,astro}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,astro}\"",
+    "format": "bun fmt \"**/*.{ts,tsx,astro}\"",
+    "format:check": "bun fmt --check \"**/*.{ts,tsx,astro}\"",
     "typecheck": "astro check",
     "check:lockfile": "bun tools/check-lockfile.mjs",
     "test": "vitest run"
