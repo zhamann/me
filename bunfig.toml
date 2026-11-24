@@ -7,3 +7,7 @@ env = false
 linker = "isolated"
 # Only install versions published at least 24 hours ago.
 minimumReleaseAge = 86400
+
+[test]
+# Random order exposes tests that depend on each other.
+randomize = true
