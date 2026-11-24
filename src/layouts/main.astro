@@ -1,6 +1,8 @@
 ---
 import "@/styles/global.css"
 
+import { Font } from "astro:assets"
+
 import SiteHeader from "@/components/site-header.astro"
 import { site } from "@/lib/site"
 
@@ -56,6 +58,9 @@ const structuredData = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Font cssVariable="--font-ibm-plex-sans" preload />
+    <Font cssVariable="--font-ibm-plex-sans-extended" />
+    <Font cssVariable="--font-ibm-plex-mono" preload />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#000000" />
     <title>{title}</title>

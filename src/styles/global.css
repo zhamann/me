@@ -1,18 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/ibm-plex-sans";
-@import "@fontsource/ibm-plex-mono/latin-400.css";
-@import "@fontsource/ibm-plex-mono/latin-600.css";
 @import "./typeset.css";
 
 /* The site is dark only: <html> always has the class. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: "IBM Plex Sans Variable", system-ui, sans-serif;
-  --font-sans: "IBM Plex Sans Variable", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-heading: var(--font-ibm-plex-sans-extended), var(--font-ibm-plex-sans);
+  --font-sans: var(--font-ibm-plex-sans-extended), var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
   --color-ink: var(--ink);
   --color-ring: var(--ring);
   --color-input: var(--input);
