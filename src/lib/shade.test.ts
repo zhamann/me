@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it } from "bun:test"
 
-import { shade } from "./drawing"
+import { shade } from "./shade"
 
 describe("shade", () => {
   it("splits where the ink changes, and not at spaces", () => {
