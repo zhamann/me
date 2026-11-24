@@ -1,0 +1,9 @@
+# Vite loads .env files itself. Bun loading them too would put local settings into
+# tests and scripts.
+env = false
+
+[install]
+# Each package sees only the dependencies it declares.
+linker = "isolated"
+# Only install versions published at least 24 hours ago.
+minimumReleaseAge = 86400
