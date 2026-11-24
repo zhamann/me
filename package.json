@@ -13,12 +13,14 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "tools/lint/node_modules/.bin/bun lint",
-    "format": "bun fmt \"**/*.{ts,tsx,astro}\"",
-    "format:check": "bun fmt --check \"**/*.{ts,tsx,astro}\"",
-    "typecheck": "astro check",
+    "format": "bun fmt",
+    "format:check": "bun fmt --check",
+    "typecheck": "astro check --noSync",
     "check:lockfile": "bun tools/check-lockfile.mjs",
     "check:tests": "bun tools/check-tests.mjs",
-    "test": "bun test --isolate"
+    "test": "bun test --isolate",
+    "verify": "astro sync && bun run --parallel --no-exit-on-error lint typecheck format:check check:tests test",
+    "prepare": "[ -n \"$CI\" ] || git config core.hooksPath .githooks || true"
   },
   "license": "UNLICENSED",
   "packageManager": "bun@1.4.5",
