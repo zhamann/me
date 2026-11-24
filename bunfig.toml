@@ -11,3 +11,104 @@ minimumReleaseAge = 86400
 [test]
 # Random order exposes tests that depend on each other.
 randomize = true
+
+[lint]
+typeAware = true
+maxWarnings = 0
+# shadcn CLI output stays as generated.
+ignorePatterns = ["/src/components/ui/", "/src/hooks/use-mobile.ts"]
+
+[lint.categories]
+correctness = "error"
+
+# The recommended rules of ESLint, typescript-eslint, and react-hooks. They're all
+# listed because Bun's own defaults leave some out, make many of them warnings,
+# and allow more. The pattern (?!) matches nothing, so `_` names count as unused.
+[lint.rules]
+# The project cards' text is their label, but nested deeper than this looks.
+"jsx-a11y/control-has-associated-label" = "off"
+"for-direction" = "error"
+"no-async-promise-executor" = "error"
+"no-case-declarations" = "error"
+"no-compare-neg-zero" = "error"
+"no-cond-assign" = "error"
+"no-constant-binary-expression" = ["error", { allowLiteralToggle = false }]
+"no-constant-condition" = "error"
+"no-control-regex" = "error"
+"no-debugger" = "error"
+"no-delete-var" = "error"
+"no-dupe-else-if" = "error"
+"no-duplicate-case" = "error"
+"no-empty" = "error"
+"no-empty-character-class" = "error"
+"no-empty-pattern" = ["error", { allowObjectPatternsAsParameters = false }]
+"no-empty-static-block" = "error"
+"no-ex-assign" = "error"
+"no-extra-boolean-cast" = "error"
+"no-fallthrough" = ["error", { commentPattern = "(?i:falls?\\s?through)" }]
+"no-global-assign" = "error"
+"no-invalid-regexp" = "error"
+"no-irregular-whitespace" = ["error", { skipComments = false, skipRegExps = false, skipTemplates = false, skipJSXText = false }]
+"no-loss-of-precision" = ["error", { ignoreDecimals = false }]
+"no-misleading-character-class" = "error"
+"no-nonoctal-decimal-escape" = "error"
+"no-octal" = "error"
+"no-prototype-builtins" = "error"
+"no-regex-spaces" = "error"
+"no-self-assign" = "error"
+"no-shadow-restricted-names" = "error"
+"no-sparse-arrays" = "error"
+"no-unassigned-vars" = "error"
+"no-unexpected-multiline" = "error"
+"no-unsafe-finally" = "error"
+"no-unsafe-optional-chaining" = "error"
+"no-unused-labels" = "error"
+"no-unused-private-class-members" = "error"
+"no-useless-assignment" = "error"
+"no-useless-backreference" = "error"
+"no-useless-catch" = "error"
+"no-useless-escape" = "error"
+"no-var" = "error"
+"prefer-const" = "error"
+"prefer-rest-params" = "error"
+"prefer-spread" = "error"
+"preserve-caught-error" = "error"
+"require-yield" = "error"
+"use-isnan" = "error"
+"valid-typeof" = "error"
+"@typescript-eslint/ban-ts-comment" = "error"
+"@typescript-eslint/no-array-constructor" = "error"
+"@typescript-eslint/no-duplicate-enum-values" = "error"
+"@typescript-eslint/no-empty-object-type" = "error"
+"@typescript-eslint/no-explicit-any" = "error"
+"@typescript-eslint/no-extra-non-null-assertion" = "error"
+"@typescript-eslint/no-misused-new" = "error"
+"@typescript-eslint/no-namespace" = ["error", { allowDeclarations = false }]
+"@typescript-eslint/no-non-null-asserted-optional-chain" = "error"
+"@typescript-eslint/no-require-imports" = "error"
+"@typescript-eslint/no-this-alias" = "error"
+"@typescript-eslint/no-unnecessary-type-constraint" = "error"
+"@typescript-eslint/no-unsafe-declaration-merging" = "error"
+"@typescript-eslint/no-unsafe-function-type" = "error"
+"@typescript-eslint/no-unused-expressions" = ["error", { allowShortCircuit = false, allowTernary = false }]
+"@typescript-eslint/no-unused-vars" = ["error", { varsIgnorePattern = "(?!)", argsIgnorePattern = "(?!)", caughtErrorsIgnorePattern = "(?!)", destructuredArrayIgnorePattern = "(?!)", ignoreRestSiblings = false }]
+"@typescript-eslint/no-wrapper-object-types" = "error"
+"@typescript-eslint/prefer-as-const" = "error"
+"@typescript-eslint/prefer-namespace-keyword" = "error"
+"@typescript-eslint/triple-slash-reference" = "error"
+"react-hooks/config" = "error"
+"react-hooks/error-boundaries" = "error"
+"react-hooks/exhaustive-deps" = "warn"
+"react-hooks/gating" = "error"
+"react-hooks/globals" = "error"
+"react-hooks/immutability" = "error"
+"react-hooks/incompatible-library" = "warn"
+"react-hooks/preserve-manual-memoization" = "error"
+"react-hooks/purity" = "error"
+"react-hooks/refs" = "error"
+"react-hooks/rules-of-hooks" = "error"
+"react-hooks/set-state-in-effect" = "error"
+"react-hooks/set-state-in-render" = "error"
+"react-hooks/static-components" = "error"
+"react-hooks/unsupported-syntax" = "warn"
+"react-hooks/use-memo" = "error"
