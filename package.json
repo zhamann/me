@@ -16,10 +16,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,astro}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,astro}\"",
     "typecheck": "astro check",
+    "check:lockfile": "bun tools/check-lockfile.mjs",
     "test": "vitest run"
   },
   "license": "UNLICENSED",
-  "packageManager": "pnpm@12.22.0",
+  "packageManager": "bun@1.4.5",
   "dependencies": {
     "@astrojs/react": "^7.1.9",
     "@astrojs/rss": "^4.0.19",
@@ -57,5 +58,9 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.73.0",
     "vitest": "^5.1.1"
+  },
+  "trustedDependencies": [],
+  "overrides": {
+    "fflate": "0.7.5"
   }
 }
